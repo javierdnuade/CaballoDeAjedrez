@@ -9,7 +9,7 @@ import impl.ColaPrioridadDA;
 public class BBCorregido {
 
     static int paso_MAX;
-    static final int MAX_SALTOS = 10000;
+    static final int MAX_SALTOS = 35000;
     static boolean corteGlobal = false;
     static int mejorRotacionGlobal = -1;
     //static List<int[][]> mejoresSoluciones = new ArrayList<>();
@@ -19,11 +19,11 @@ public class BBCorregido {
     static int mejorSolucionSaltos = Integer.MAX_VALUE;
     static int[][] mejorSolucion;
 
-     // 🔹 PESOS Y FASES (HEURÍSTICAS COMPUESTAS)
+    // 🔹 PESOS Y FASES (HEURÍSTICAS COMPUESTAS)
     static final int PESO_WARNSDORFF = 1_000;
     static final int PESO_CENTRO = 100;
     static final int PESO_ORDEN = 1;
-    static final double FASE_BORDE = 0.2; // % del recorrido. Se puede modificar
+    static final double FASE_BORDE = 0.8; // % del recorrido. Se puede modificar
 
     public static boolean solve(int N, int startX, int startY) {
         mejorSolucion = null;
@@ -34,8 +34,8 @@ public class BBCorregido {
 
         for (int rot = 0; rot < 8; rot++) {
             System.out.println("\n Ejecutando rotación #" + (rot + 1));
-            System.out.println(" Vector dx: " + Arrays.toString(dx));
-            System.out.println(" Vector dy: " + Arrays.toString(dy));
+            System.out.println(" Vector dy: " + Arrays.toString(dx));
+            System.out.println(" Vector dx: " + Arrays.toString(dy));
 
             int[][] board = new int[N][N];
             for (int[] fila : board) Arrays.fill(fila, -1);
