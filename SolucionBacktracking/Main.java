@@ -9,8 +9,8 @@ public class Main {
         // int startY = random.nextInt(N);
         int startX = 2;
         int startY = 3;
-        System.out.println("Posición inicial del caballo: (" + startX + ", " + startY + ")");
-
+        System.out.println("\nTablero de "+  N + "*" + N  +". Posición inicial del caballo: (" + startX + ", " + startY + ")");
+        System.out.println();
         java.time.Instant inicio = java.time.Instant.now();
         // int[][] solution = Backtracking.solve(N,startX, startY);
         int[][] solution = Backtracking2.solve(N,startX, startY);
@@ -21,12 +21,13 @@ public class Main {
         System.out.println("Tiempo de ejecución: " + millis + " ms");
         
         if (solution != null) {
-            for (int[] fila : solution) {
+            /*for (int[] fila : solution) {
                 for (int val : fila) System.out.printf("%2d ", val);
                 System.out.println();
-            }
+            }*/
+            System.out.println("¡Soluciones encontrada!");
         } else {
-            System.out.println("No hay solución 😢");
+            System.out.println("No hay solución");
         }
     }
 }
