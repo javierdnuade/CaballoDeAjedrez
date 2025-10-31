@@ -2,10 +2,11 @@ package SolucionBacktracking;
 
 public class Backtracking2 {
     // Definimos los 8 posibles movimientos del caballo
-    static int[] dx = {2, 1, -1, -2, -2, -1, 1, 2};
-    static int[] dy = {1, 2, 2, 1, -1, -2, -2, -1};
+    static int[] dx = {1, 2, -1, -2, -2, -1, 1, 2};
+    static int[] dy = {2, 1, 2, 1, -1, -2, -2, -1};
+    static int contadorSoluciones = 0; // 
 
-    static int contadorSaltos = 0; // ✅ Contador global de movimientos evaluados
+    static int contadorSaltos = 0; // Contador global de movimientos evaluados
 
     public static int[][] solve(int N, int startX, int startY) {
         int[][] board = new int[N][N]; // Creamos la matriz de n numeros
@@ -14,7 +15,7 @@ public class Backtracking2 {
         board[startX][startY] = 1; // Colocamos el primer paso del caballo
         
         if (resolver(board, N, startX, startY, 2)) {
-            System.out.println("Movimientos evaluados: " + contadorSaltos); // ✅ Imprimimos el contador al encontrar la solución
+            System.out.println("Movimientos evaluados: " + contadorSaltos); // Imprimimos el contador al encontrar la solución
             return board;
         }
         
@@ -23,7 +24,14 @@ public class Backtracking2 {
     }
 
     private static boolean resolver(int[][] board, int N, int x, int y, int paso) {
-        if (paso > N * N) return true; // Si ya recorrimos todas las posiciones, retornamos true
+        if (paso > N * N) { // Verificacion de recorrido hecho
+            contadorSoluciones++;
+            System.out.println("Solución #" + contadorSoluciones + " encontrada después de evaluar " + contadorSaltos + " movimientos.");
+            imprimirTablero(board);
+            if (contadorSoluciones == 10) {
+                return true; // Detenemos la búsqueda después de encontrar 10 soluciones
+            }
+        } 
         for (int i = 0; i < 8; i++) {  // Probamos los 8 movimientos posibles en el peor caso
             int nx = x + dx[i];
             int ny = y + dy[i];
@@ -41,5 +49,13 @@ public class Backtracking2 {
 
     private static boolean enRango(int x, int y, int N) { // Verifica si una posición está dentro del tablero
         return x >= 0 && y >= 0 && x < N && y < N; 
+    }
+
+    public static void imprimirTablero(int[][] board) {
+        for (int[] fila : board) {
+            for (int val : fila)
+                System.out.printf("%3d ", val);
+            System.out.println();
+        }
     }
 }
